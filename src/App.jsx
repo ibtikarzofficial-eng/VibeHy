@@ -75,7 +75,7 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh', background: '#fbfbfd' }}>
+    <div className="app-container">
 
       {/* SIDEBAR */}
       <div className="sidebar">
@@ -194,15 +194,17 @@ export default function App() {
         {/* Zoom Controls */}
         <div className="zoom-slider-container">
           <div className="zoom-label">Zoom</div>
-          <input 
-            type="range" 
-            min="0.5" 
-            max="3" 
-            step="0.05" 
-            value={zoomLevel} 
-            onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
-            className="vertical-slider"
-          />
+          <div className="vertical-slider-wrapper">
+            <input 
+              type="range" 
+              min="0.5" 
+              max="3" 
+              step="0.05" 
+              value={zoomLevel} 
+              onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
+              className="vertical-slider"
+            />
+          </div>
         </div>
       </div>
     </div>

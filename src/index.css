@@ -342,13 +342,75 @@ input[type="range"]:focus {
   color: #1d1d1f;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 70px; /* space for the rotated input */
+  margin-bottom: 20px;
+}
+
+.vertical-slider-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .vertical-slider {
-  /* Rotate the slider to make it vertical */
-  transform: rotate(-90deg);
-  width: 140px !important;
-  margin-top: 0 !important;
-  transform-origin: center center;
+  -webkit-appearance: slider-vertical;
+  appearance: slider-vertical;
+  width: 8px !important;
+  height: 120px !important;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+/* --- Responsive Design --- */
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: #fbfbfd;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column-reverse;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: 55vh;
+    padding: 24px 20px;
+    border-right: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .viewport {
+    height: 45vh;
+    flex: none;
+  }
+
+  /* Adjust zoom slider for mobile */
+  .zoom-slider-container {
+    right: 15px;
+    height: 150px;
+    padding: 15px 5px;
+    transform: translateY(-60%);
+  }
+  
+  .vertical-slider {
+    height: 90px !important;
+  }
+
+  /* Adjust camera controls for mobile */
+  .camera-controls {
+    bottom: 20px;
+    padding: 5px;
+  }
+  
+  .cam-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 }
