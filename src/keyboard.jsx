@@ -20,9 +20,9 @@ function TexturedCaseMaterial({ config }) {
 
 function PresetMaterial({ preset }) {
   const props = useTexture({
-    map: `/materials/${preset}/color.jpg`,
-    normalMap: `/materials/${preset}/normal.jpg`,
-    roughnessMap: `/materials/${preset}/roughness.jpg`
+    map: `/materials/${preset}/Color.jpg`,
+    normalMap: `/materials/${preset}/Normal.jpg`,
+    roughnessMap: `/materials/${preset}/Roughness.jpg`
   })
   
   props.map.wrapS = props.map.wrapT = THREE.RepeatWrapping;

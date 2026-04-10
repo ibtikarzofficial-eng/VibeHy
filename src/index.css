@@ -347,15 +347,19 @@ input[type="range"]:focus {
 
 .vertical-slider-wrapper {
   flex: 1;
+  width: 32px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .vertical-slider {
-  width: 8px !important;
-  height: 120px !important;
+  position: absolute;
+  width: 120px !important;
+  height: 24px !important;
   margin: 0 !important;
+  transform: rotate(-90deg);
   cursor: pointer;
 }
 
