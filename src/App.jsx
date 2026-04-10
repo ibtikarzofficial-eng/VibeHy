@@ -203,6 +203,7 @@ export default function App() {
               value={zoomLevel} 
               onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
               className="vertical-slider"
+              style={{ writingMode: 'vertical-lr', direction: 'rtl' }}
             />
           </div>
         </div>

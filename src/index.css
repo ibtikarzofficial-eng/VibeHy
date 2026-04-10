@@ -353,8 +353,6 @@ input[type="range"]:focus {
 }
 
 .vertical-slider {
-  -webkit-appearance: slider-vertical;
-  appearance: slider-vertical;
   width: 8px !important;
   height: 120px !important;
   margin: 0 !important;
