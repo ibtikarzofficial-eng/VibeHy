@@ -314,3 +314,41 @@ input[type="range"]:focus {
 .cam-btn:not(.active):hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
+/* Right-aligned Zoom Slider */
+.zoom-slider-container {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px 10px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: 100;
+  height: 200px;
+  justify-content: space-between;
+}
+
+.zoom-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d1d1f;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 70px; /* space for the rotated input */
+}
+
+.vertical-slider {
+  /* Rotate the slider to make it vertical */
+  transform: rotate(-90deg);
+  width: 140px !important;
+  margin-top: 0 !important;
+  transform-origin: center center;
+}

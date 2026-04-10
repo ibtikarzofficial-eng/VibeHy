@@ -7,10 +7,16 @@ import * as THREE from 'three'
 import './index.css'
 
 // Fixes the camera animation
-function CameraDirector({ targetPosition }) {
+function CameraDirector({ targetPosition, targetFov }) {
   useFrame((state) => {
     state.camera.position.lerp(targetPosition, 0.05);
     state.camera.lookAt(0, 0, 0);
+    
+    // Smoothly interpolate FOV for zooming
+    if (Math.abs(state.camera.fov - targetFov) > 0.01) {
+      state.camera.fov = THREE.MathUtils.lerp(state.camera.fov, targetFov, 0.1);
+      state.camera.updateProjectionMatrix();
+    }
   });
   return null;
 }
@@ -19,6 +25,7 @@ export default function App() {
   const [prompt, setPrompt] = useState("");
   const [isVibing, setIsVibing] = useState(false);
   const [activeTab, setActiveTab] = useState("ai");
+  const [zoomLevel, setZoomLevel] = useState(1); // 1x = standard 2x zoom
 
   // Camera State
   const [camView, setCamView] = useState("isometric");
@@ -162,10 +169,10 @@ export default function App() {
       </div>
 
       {/* VIEWPORT */}
-      <div className="viewport">
+      <div className="viewport" style={{ position: 'relative' }}>
         {/* THIS WAS THE FIX: Re-adding the camera props here. FOV halved for 2x Zoom */}
         <Canvas shadows camera={{ position: [0, 0, 0], fov: 17.5 }}>
-          <CameraDirector targetPosition={camPositions[camView]} />
+          <CameraDirector targetPosition={camPositions[camView]} targetFov={17.5 / zoomLevel} />
 
           <Suspense fallback={null}>
             <Stage intensity={0.6} environment="city" adjustCamera={false} shadows={false}>
@@ -182,6 +189,20 @@ export default function App() {
           <button className={`cam-btn ${camView === 'isometric' ? 'active' : ''}`} onClick={() => setCamView('isometric')}>Isometric</button>
           <button className={`cam-btn ${camView === 'top' ? 'active' : ''}`} onClick={() => setCamView('top')}>Top Down</button>
           <button className={`cam-btn ${camView === 'front' ? 'active' : ''}`} onClick={() => setCamView('front')}>Front</button>
+        </div>
+
+        {/* Zoom Controls */}
+        <div className="zoom-slider-container">
+          <div className="zoom-label">Zoom</div>
+          <input 
+            type="range" 
+            min="0.5" 
+            max="3" 
+            step="0.05" 
+            value={zoomLevel} 
+            onChange={(e) => setZoomLevel(parseFloat(e.target.value))}
+            className="vertical-slider"
+          />
         </div>
       </div>
     </div>

@@ -18,6 +18,31 @@ function TexturedCaseMaterial({ config }) {
   )
 }
 
+function PresetMaterial({ preset }) {
+  const props = useTexture({
+    map: `/materials/${preset}/color.jpg`,
+    normalMap: `/materials/${preset}/normal.jpg`,
+    roughnessMap: `/materials/${preset}/roughness.jpg`
+  })
+  
+  props.map.wrapS = props.map.wrapT = THREE.RepeatWrapping;
+  props.normalMap.wrapS = props.normalMap.wrapT = THREE.RepeatWrapping;
+  props.roughnessMap.wrapS = props.roughnessMap.wrapT = THREE.RepeatWrapping;
+  
+  props.map.repeat.set(2, 2);
+  props.normalMap.repeat.set(2, 2);
+  props.roughnessMap.repeat.set(2, 2);
+  
+  props.map.colorSpace = THREE.SRGBColorSpace;
+
+  return (
+    <meshStandardMaterial
+      {...props}
+      color="white"
+    />
+  )
+}
+
 export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning to props
   const { nodes } = useGLTF('/vortexkeyboard.glb')
   const groupRef = useRef()
@@ -62,7 +87,9 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
 
           {/* The Case & Plate */}
           < mesh geometry={nodes.Object_24.geometry} position={[0.778, -1.016, -0.785]} rotation={[-0.028, 0, 0]} scale={[3.149, 13.351, 7.317]} >
-            {config.textureUrl ? (
+            {config.materialPreset && config.materialPreset !== 'none' ? (
+              <PresetMaterial preset={config.materialPreset} />
+            ) : config.textureUrl ? (
               <TexturedCaseMaterial config={config} />
             ) : (
               <meshStandardMaterial
@@ -73,7 +100,9 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
             )}
           </mesh >
           <mesh geometry={nodes.Object_28.geometry} position={[-0.571, -0.58, 0.014]} rotation={[0.039, 0, 0]} scale={[3.149, 13.349, 7.322]}>
-            {config.textureUrl ? (
+            {config.materialPreset && config.materialPreset !== 'none' ? (
+              <PresetMaterial preset={config.materialPreset} />
+            ) : config.textureUrl ? (
               <TexturedCaseMaterial config={config} />
             ) : (
               <meshStandardMaterial
@@ -84,7 +113,9 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
             )}
           </mesh>
           <mesh geometry={nodes.Object_30.geometry} position={[0.008, -0.95, -0.01]} rotation={[-0.005, 0, 0]} scale={[3.149, 13.354, 7.312]}>
-            {config.textureUrl ? (
+            {config.materialPreset && config.materialPreset !== 'none' ? (
+              <PresetMaterial preset={config.materialPreset} />
+            ) : config.textureUrl ? (
               <TexturedCaseMaterial config={config} />
             ) : (
               <meshStandardMaterial
@@ -95,7 +126,9 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
             )}
           </mesh>
           <mesh geometry={nodes.Object_32.geometry} position={[-0.724, -1.008, 0.795]} rotation={[-0.005, 0, 0]} scale={[3.149, 13.354, 7.312]}>
-            {config.textureUrl ? (
+            {config.materialPreset && config.materialPreset !== 'none' ? (
+              <PresetMaterial preset={config.materialPreset} />
+            ) : config.textureUrl ? (
               <TexturedCaseMaterial config={config} />
             ) : (
               <meshStandardMaterial
@@ -106,7 +139,9 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
             )}
           </mesh>
           <mesh geometry={nodes.Object_34.geometry} position={[-0.881, -1.05, -0.624]} rotation={[0.015, 0, 0]} scale={[3.149, 13.353, 7.314]}>
-            {config.textureUrl ? (
+            {config.materialPreset && config.materialPreset !== 'none' ? (
+              <PresetMaterial preset={config.materialPreset} />
+            ) : config.textureUrl ? (
               <TexturedCaseMaterial config={config} />
             ) : (
               <meshStandardMaterial
