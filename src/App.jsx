@@ -23,9 +23,9 @@ export default function App() {
   // Camera State
   const [camView, setCamView] = useState("isometric");
   const camPositions = {
-    isometric: new THREE.Vector3(0, 1.2, 3.5),
-    top: new THREE.Vector3(0, 3.5, 0.01),
-    front: new THREE.Vector3(0, 0.2, 3.5)
+    isometric: new THREE.Vector3(0, 0.6, 1.75),
+    top: new THREE.Vector3(0, 1.75, 0.01),
+    front: new THREE.Vector3(0, 0.1, 1.75)
   };
 
   // State
