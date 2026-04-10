@@ -23,9 +23,9 @@ export default function App() {
   // Camera State
   const [camView, setCamView] = useState("isometric");
   const camPositions = {
-    isometric: new THREE.Vector3(0, 0.6, 1.75),
-    top: new THREE.Vector3(0, 1.75, 0.01),
-    front: new THREE.Vector3(0, 0.1, 1.75)
+    isometric: new THREE.Vector3(0, 1.2, 3.5),
+    top: new THREE.Vector3(0, 3.5, 0.01),
+    front: new THREE.Vector3(0, 0.2, 3.5)
   };
 
   // State
@@ -120,6 +120,26 @@ export default function App() {
               </div>
 
               <div className="control-group">
+                <label className="input-label">Custom Image Skin (Chassis)</label>
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      updateVibe('textureUrl', URL.createObjectURL(file));
+                    }
+                  }} 
+                  style={{marginBottom: '10px'}}
+                />
+                {vibeState.textureUrl && (
+                  <button className="cam-btn" onClick={() => updateVibe('textureUrl', null)}>
+                    Remove Image
+                  </button>
+                )}
+              </div>
+
+              <div className="control-group">
                 <label className="input-label">Material Physics (Case)</label>
                 <div style={{ marginBottom: '15px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
@@ -143,8 +163,8 @@ export default function App() {
 
       {/* VIEWPORT */}
       <div className="viewport">
-        {/* THIS WAS THE FIX: Re-adding the camera props here */}
-        <Canvas shadows camera={{ position: [0, 0, 0], fov: 35 }}>
+        {/* THIS WAS THE FIX: Re-adding the camera props here. FOV halved for 2x Zoom */}
+        <Canvas shadows camera={{ position: [0, 0, 0], fov: 17.5 }}>
           <CameraDirector targetPosition={camPositions[camView]} />
 
           <Suspense fallback={null}>

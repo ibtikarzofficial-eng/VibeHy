@@ -1,6 +1,22 @@
 import React, { useRef } from 'react' // Add useRef
-import { useGLTF, Center } from '@react-three/drei'
+import { useGLTF, Center, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber' // Add useFrame
+import * as THREE from 'three'
+
+function TexturedCaseMaterial({ config }) {
+  const texture = useTexture(config.textureUrl)
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(2, 2); // Adjust scaling so the texture looks good
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return (
+    <meshStandardMaterial
+      map={texture}
+      color="white"
+      roughness={config.roughness !== undefined ? config.roughness : 0.5}
+      metalness={config.metalness !== undefined ? config.metalness : 0.1}
+    />
+  )
+}
 
 export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning to props
   const { nodes } = useGLTF('/vortexkeyboard.glb')
@@ -46,39 +62,59 @@ export function Keyboard({ config, isSpinning, ...props }) { // Add isSpinning t
 
           {/* The Case & Plate */}
           < mesh geometry={nodes.Object_24.geometry} position={[0.778, -1.016, -0.785]} rotation={[-0.028, 0, 0]} scale={[3.149, 13.351, 7.317]} >
-            <meshStandardMaterial
-              color={config.caseColor}
-              roughness={config.roughness !== undefined ? config.roughness : 0.5}
-              metalness={config.metalness !== undefined ? config.metalness : 0.1}
-            />
+            {config.textureUrl ? (
+              <TexturedCaseMaterial config={config} />
+            ) : (
+              <meshStandardMaterial
+                color={config.caseColor}
+                roughness={config.roughness !== undefined ? config.roughness : 0.5}
+                metalness={config.metalness !== undefined ? config.metalness : 0.1}
+              />
+            )}
           </mesh >
           <mesh geometry={nodes.Object_28.geometry} position={[-0.571, -0.58, 0.014]} rotation={[0.039, 0, 0]} scale={[3.149, 13.349, 7.322]}>
-            <meshStandardMaterial
-              color={config.caseColor}
-              roughness={config.roughness !== undefined ? config.roughness : 0.5}
-              metalness={config.metalness !== undefined ? config.metalness : 0.1}
-            />
+            {config.textureUrl ? (
+              <TexturedCaseMaterial config={config} />
+            ) : (
+              <meshStandardMaterial
+                color={config.caseColor}
+                roughness={config.roughness !== undefined ? config.roughness : 0.5}
+                metalness={config.metalness !== undefined ? config.metalness : 0.1}
+              />
+            )}
           </mesh>
           <mesh geometry={nodes.Object_30.geometry} position={[0.008, -0.95, -0.01]} rotation={[-0.005, 0, 0]} scale={[3.149, 13.354, 7.312]}>
-            <meshStandardMaterial
-              color={config.caseColor}
-              roughness={config.roughness !== undefined ? config.roughness : 0.5}
-              metalness={config.metalness !== undefined ? config.metalness : 0.1}
-            />
+            {config.textureUrl ? (
+              <TexturedCaseMaterial config={config} />
+            ) : (
+              <meshStandardMaterial
+                color={config.caseColor}
+                roughness={config.roughness !== undefined ? config.roughness : 0.5}
+                metalness={config.metalness !== undefined ? config.metalness : 0.1}
+              />
+            )}
           </mesh>
           <mesh geometry={nodes.Object_32.geometry} position={[-0.724, -1.008, 0.795]} rotation={[-0.005, 0, 0]} scale={[3.149, 13.354, 7.312]}>
-            <meshStandardMaterial
-              color={config.caseColor}
-              roughness={config.roughness !== undefined ? config.roughness : 0.5}
-              metalness={config.metalness !== undefined ? config.metalness : 0.1}
-            />
+            {config.textureUrl ? (
+              <TexturedCaseMaterial config={config} />
+            ) : (
+              <meshStandardMaterial
+                color={config.caseColor}
+                roughness={config.roughness !== undefined ? config.roughness : 0.5}
+                metalness={config.metalness !== undefined ? config.metalness : 0.1}
+              />
+            )}
           </mesh>
           <mesh geometry={nodes.Object_34.geometry} position={[-0.881, -1.05, -0.624]} rotation={[0.015, 0, 0]} scale={[3.149, 13.353, 7.314]}>
-            <meshStandardMaterial
-              color={config.caseColor}
-              roughness={config.roughness !== undefined ? config.roughness : 0.5}
-              metalness={config.metalness !== undefined ? config.metalness : 0.1}
-            />
+            {config.textureUrl ? (
+              <TexturedCaseMaterial config={config} />
+            ) : (
+              <meshStandardMaterial
+                color={config.caseColor}
+                roughness={config.roughness !== undefined ? config.roughness : 0.5}
+                metalness={config.metalness !== undefined ? config.metalness : 0.1}
+              />
+            )}
           </mesh>
           <mesh geometry={nodes.Object_36.geometry} position={[0.01, -0.595, 0.039]} rotation={[-0.021, 0, 0]} scale={[3.149, 13.352, 7.315]}>
             <meshStandardMaterial color="#111111" roughness={0.6} metalness={0.5} />
